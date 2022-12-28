@@ -22,8 +22,8 @@ class publicClass implements UniversityClass
 }
 
 
-//3. Create the Factory! in this factory we should declare which type we want!
-abstract class educationProgram
+//3. Create the MAin Factory! in this factory we should declare which type we want!
+abstract class educationProgramFactory
 {
     abstract protected function makeClass():UniversityClass;
     public  function createEducationProgram():void
@@ -32,15 +32,15 @@ abstract class educationProgram
         $classType->createClass();
     }
 }
-// 4. return initiation of different type
-class PrivateEducationProgram extends educationProgram
+// 4. Create factory for different type
+class PrivateEducationProgramFactory extends educationProgramFactory
 {
     protected function makeClass(): UniversityClass
     {
         return new PrivateClass();
     }
 }
-class PublicEducationProgram extends educationProgram
+class PublicEducationProgramFactory extends educationProgramFactory
 {
     protected function makeClass(): UniversityClass
     {
@@ -48,9 +48,9 @@ class PublicEducationProgram extends educationProgram
     }
 }
 
-$private= new PrivateEducationProgram();
+$private= new PrivateEducationProgramFactory();
 $private->createEducationProgram();
 
 
-$public= new PublicEducationProgram();
+$public= new PublicEducationProgramFactory();
 $public->createEducationProgram();
