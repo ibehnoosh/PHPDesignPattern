@@ -1,9 +1,10 @@
 <?php
+//1. Declare what we want!
 interface  UniversityClass
 {
     function createClass();
 }
-
+// 2. Build different type of it
 class PrivateClass implements UniversityClass
 {
     function createClass()
@@ -20,6 +21,8 @@ class publicClass implements UniversityClass
     }
 }
 
+
+//3. Create the Factory! in this factory we should declare which type we want!
 abstract class educationProgram
 {
     abstract protected function makeClass():UniversityClass;
@@ -29,7 +32,7 @@ abstract class educationProgram
         $classType->createClass();
     }
 }
-
+// 4. return initiation of different type
 class PrivateEducationProgram extends educationProgram
 {
     protected function makeClass(): UniversityClass
