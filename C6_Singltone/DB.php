@@ -1,14 +1,14 @@
 <?php
-final class DB
+class Singleton
 {
     private static $instance;
 
-    private function __construct()
+    protected function __construct()
     {
         // Hide the constructor
     }
 
-    public static function getInstance(): DB
+    public static function getInstance(): Singleton
     {
         if (!self::$instance) {
             self::$instance = new self();
@@ -17,17 +17,28 @@ final class DB
         return self::$instance;
     }
 
-    private function __clone()
+    public function __clone()
     {
         // Disable cloning
     }
 
-    private function __wakeup()
+    public function __wakeup()
     {
         // Disable unserialize
     }
 }
-$president1 = DB::getInstance();
-$president2 = DB::getInstance();
 
+class config extends Singleton
+{
+    public function getData()
+    {
+        return [
+            'host' => '127.0.1.1'
+        ];
+    }
+}
+$president1 = config::getInstance();
+$president2 = config::getInstance();
+
+var_dump($president1);
 var_dump($president1 === $president2); // true
