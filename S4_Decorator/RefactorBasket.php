@@ -7,6 +7,27 @@ interface Cost
     public function getDescription();
     public function getDetails();
 }
+
+abstract  class Decoreator  implements Cost
+{
+    protected $cost;
+    public function __construct(Cost $cost)
+    {
+        $this->cost=$cost;
+    }
+    public function getTotalCost()
+    {
+        return $this->cost->getTotalCost() + static::getCost();
+    }
+
+    public function  getDetails()
+    {
+        return  $this->cost->getDetails() + [
+                static::getDescription()=>static::getCost()
+            ];
+    }
+
+}
 class BasketCost implements Cost
 {
     public function getCost()
@@ -30,13 +51,10 @@ class BasketCost implements Cost
     }
 }
 
-class ShippingDecorator implements Cost
+
+class ShippingDecorator extends Decoreator
 {
-    private $cost;
-    public function __construct(Cost $cost)
-    {
-        $this->cost=$cost;
-    }
+
     public function getCost()
     {
         return 1000;
@@ -45,26 +63,11 @@ class ShippingDecorator implements Cost
     {
         return 'Shipping Cost';
     }
-    public function getTotalCost()
-    {
-        return $this->cost->getTotalCost() + self::getCost();
-    }
 
-    public function  getDetails()
-    {
-        return  $this->cost->getDetails() + [
-                self::getDescription()=>self::getCost()
-            ];
-    }
 }
 
-class TaxDecorator implements Cost
+class TaxDecorator extends Decoreator
 {
-    private $cost;
-    public function __construct(Cost $cost)
-    {
-        $this->cost=$cost;
-    }
     public function getCost()
     {
         return $this->cost->getTotalCost()*0.09;
@@ -73,17 +76,7 @@ class TaxDecorator implements Cost
     {
         return 'Tax Cost';
     }
-    public function getTotalCost()
-    {
-        return  $this->cost->getTotalCost() + self::getCost();
-    }
 
-    public function  getDetails()
-    {
-        return  $this->cost->getDetails() + [
-                self::getDescription()=>self::getCost()
-            ];
-    }
 }
 //$basketCost=new BasketCost;
 //$shippingAndBasketCost= new ShippingDecorator(new BasketCost());
