@@ -1,4 +1,6 @@
 <?php
+
+//Define What is Chain?
 abstract class Account
 {
     protected $successor;
