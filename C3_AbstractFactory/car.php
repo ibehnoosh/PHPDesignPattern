@@ -1,37 +1,59 @@
 <?php
-interface CarFactory {
-    public function createCar(): Car;
-    public function createTruck(): Truck;
-}
-interface Car {/*...*/}
-class Sedan implements Car {/*...*/}
-class SUV implements Car {/*...*/}
-interface Truck {/*...*/}
-class PickupTruck implements Truck {/*...*/}
-class BoxTruck implements Truck {/*...*/}
-
-class FamilyCarFactory implements CarFactory {
-    public function createCar(): Sedan {
-        return new Sedan();
-    }
-    public function createTruck(): PickupTruck {
-        return new PickupTruck();
-    }
+abstract class CarFactory {
+    abstract public function createCar(): Car;
+    abstract public function createTruck(): Truck;
 }
 
-class LuxuryCarFactory implements CarFactory {
-    public function createCar(): SUV {
-        return new SUV();
+abstract class Car {
+    abstract public function drive();
+}
+
+abstract class Truck {
+    abstract public function load();
+}
+
+class ElectricCar extends Car {
+    public function drive() {
+        // code to drive electric car
     }
-    public function createTruck(): BoxTruck {
-        return new BoxTruck();
+}
+class PetrolCar extends Car {
+    public function drive() {
+        // code to drive petrol car
+    }
+}
+class ElectricTruck extends Truck {
+    public function load() {
+        // code to load electric truck
+    }
+}
+class PetrolTruck extends Truck {
+    public function load() {
+        // code to load petrol truck
     }
 }
 
-$familyCarFactory = new FamilyCarFactory();
-$sedan = $familyCarFactory->createCar();
-$pickupTruck = $familyCarFactory->createTruck();
+class ElectricCarFactory extends CarFactory {
+    public function createCar(): ElectricCar {
+        return new ElectricCar();
+    }
+    public function createTruck(): ElectricTruck {
+        return new ElectricTruck();
+    }
+}
+class PetrolCarFactory extends CarFactory {
+    public function createCar(): PetrolCar {
+        return new PetrolCar();
+    }
+    public function createTruck(): PetrolTruck {
+        return new PetrolTruck();
+    }
+}
 
-$luxuryCarFactory = new LuxuryCarFactory();
-$suv = $luxuryCarFactory->createCar();
-$boxTruck = $luxuryCarFactory->createTruck();
+$electricCarFactory = new ElectricCarFactory();
+$electricCar = $electricCarFactory->createCar();
+$electricCar->drive();
+
+$petrolCarFactory = new PetrolCarFactory();
+$petrolCar = $petrolCarFactory->createCar();
+$petrolCar->drive();
