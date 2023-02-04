@@ -103,5 +103,6 @@ $reportMaker = new ReportMaker();
 $fullReportBuilder = new FullReportBuilder();
 $reportMaker->setStudentReportBuilder($fullReportBuilder);
 $reportMaker->buildReport();
-$
+$reportMaker->getStudentReport();
+
 
