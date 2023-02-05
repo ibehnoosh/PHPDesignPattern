@@ -34,7 +34,7 @@ class JobSeeker implements Observer
     }
 }
 
-class EmploymentAgency implements Observable
+class EmploymentAgency implements Observer
 {
     protected $observers = [];
 
