@@ -46,13 +46,13 @@ class TimeTracker extends ExamDecorator {
 class ExplanationDecorator extends ExamDecorator {
     public function displayQuestions() {
         parent::displayQuestions();
-        echo 'ExplanationDecorator'.PHP_EOL;
+        echo 'ExplanationDecorator_displayQuestions'.PHP_EOL;
     }
 }
 
 $basicExam = new BasicExam();
-$trackedExam = new TimeTracker($basicExam);
-//$explainedExam = new ExplanationDecorator($trackedExam);
+//$trackedExam = new TimeTracker($basicExam);
+$explainedExam = new ExplanationDecorator($basicExam);
 
-$trackedExam->displayQuestions();
-$trackedExam->receiveAnswers();
+$explainedExam->displayQuestions();
+//$explainedExam->receiveAnswers();
