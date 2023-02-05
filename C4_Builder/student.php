@@ -110,3 +110,4 @@ $basicMaterial = $basicBuilder
     ->addSlide("Slide 1: Overview of programming")
     ->addNote(['A','B'])
     ->addQuiz(['A','B']);
+var_dump($basicBuilder);
