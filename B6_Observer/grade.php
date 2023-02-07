@@ -80,11 +80,11 @@ class Student implements Subject
 }
 
 $teacher1 = new Teacher("Mr. Smith");
-$teacher2 = new Teacher("Ms. Johnson");
+//$teacher2 = new Teacher("Ms. Johnson");
 
 $student = new Student("John Doe", "A");
 $student->attach($teacher1);
-$student->attach($teacher2);
+//$student->attach($teacher2);
 
 $student->setGrade("B");
 
