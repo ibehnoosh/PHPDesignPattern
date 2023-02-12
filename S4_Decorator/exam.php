@@ -55,4 +55,4 @@ $basicExam = new BasicExam();
 $explainedExam = new ExplanationDecorator($basicExam);
 
 $explainedExam->displayQuestions();
-//$explainedExam->receiveAnswers();
+$explainedExam->receiveAnswers();
